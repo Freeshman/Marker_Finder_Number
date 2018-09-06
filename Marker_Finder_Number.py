@@ -158,13 +158,13 @@ def Finder_Number(img,col_row,thres_value=100,min_area_coef=0.25,min_perimeter_c
             cv2.ellipse(all_img,all_possible_ellipse[i],(0,200,0),2)                
         figure(p)
         subplot(221)
-        imshow(cimg[p])
+        imshow(cv2.cvtColor(cimg[p],cv2.COLOR_BGR2RGB))
         title('Ellipses numberied')
         subplot(222)
         imshow(edges)
         title('Edges')
         subplot(223)
-        imshow(all_img)
+        imshow(cv2.cvtColor(all_image,cv2.COLOR_BGR2RGB))
         title('Ellipses detected')
         print('Try a better thres_value')
     #Number the marker
@@ -175,7 +175,7 @@ def Finder_Number(img,col_row,thres_value=100,min_area_coef=0.25,min_perimeter_c
         imgp.append(xy)
         cv2.putText(cimg[p],'{}'.format(n),(int(xy[0]),int(xy[1])),font,1.0,(255,255,255),1)
         n=n+1        
-    imshow(cimg[p])
+    imshow(cv2.cvtColor(cimg[p],cv2.COLOR_BGR2RGB))
     return imgp
      
 
