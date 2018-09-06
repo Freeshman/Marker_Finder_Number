@@ -8,7 +8,7 @@ Output Photo
 
 ![](https://github.com/Freeshman/Marker_Finder_Number/blob/master/result.png)
 ## Usage
-Reference the example.py
+Refer to the example.py
 ## How It works
 1.The script converts the image to gry image to find the contour according to the thresh_value
 
