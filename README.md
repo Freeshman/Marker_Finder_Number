@@ -3,6 +3,7 @@
 Input Photo
 
 ![](https://github.com/Freeshman/Marker_Finder_Number/blob/master/7.png)
+
 Output Photo
 
 ![](https://github.com/Freeshman/Marker_Finder_Number/blob/master/result.png)
@@ -13,7 +14,7 @@ Reference the example.py
 
 2.Then It removes the contour according to min_area_coef and min_perimeter_coef.
 
-**note**: The min_area_coef and min_perimeter_coef is the ratio of the mean value of area and perimeter respectively. Ex: min_area_coef=1 means the minimum area accepttable is the mean area of the contours.
+**note**: The min_area_coef and min_perimeter_coef are the ratio of the mean value of area and perimeter respectively. Ex: min_area_coef=1 means the minimum area accepttable is the mean area of the contours.
 
 3.The script will find the up-left ring as the origin of the number.
 
