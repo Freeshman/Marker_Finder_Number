@@ -164,7 +164,7 @@ def Finder_Number(img,col_row,thres_value=100,min_area_coef=0.25,min_perimeter_c
         imshow(edges)
         title('Edges')
         subplot(223)
-        imshow(cv2.cvtColor(all_image,cv2.COLOR_BGR2RGB))
+        imshow(cv2.cvtColor(all_img,cv2.COLOR_BGR2RGB))
         title('Ellipses detected')
         print('Try a better thres_value')
     #Number the marker
