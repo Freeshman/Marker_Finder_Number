@@ -1,5 +1,5 @@
 # Marker_Finder_Number
-## This is a Python script to find and number the hollow black rings. It will return the location of the center of the rings by an order.
+## This is a Python script to find and number the hollow black rings. It will return the ordered location of the center of the rings.
 Input Photo
 
 ![](https://github.com/Freeshman/Marker_Finder_Number/blob/master/7.png)
