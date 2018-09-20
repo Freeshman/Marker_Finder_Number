@@ -8,7 +8,7 @@ Created on Mon Aug 20 10:10:07 2018
 
 from pylab import *
 import cv2
-def Finder_Number(img,col_row,thres_value=100,min_area_coef=0.25,min_perimeter_coef=0.25):
+def Finder_Number(img,col_row,min_area_coef=0.25,min_perimeter_coef=0.25):
     if len(col_row)!=2:
         print('Wrong col_row')
         return
@@ -20,7 +20,9 @@ def Finder_Number(img,col_row,thres_value=100,min_area_coef=0.25,min_perimeter_c
     cimg.append(img)
     all_img=copy(img)
     img= cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    ret, binary1 = cv2.threshold(img,thres_value,255,cv2.THRESH_BINARY)
+    img=cv2.GaussianBlur(img,(5,5),0)
+    ret, binary1 = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    # ret, binary1 = cv2.threshold(img,thres_value,255,cv2.THRESH_BINARY)
     edges = cv2.Canny(binary1,50,150)
     _,contours,_ = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     
@@ -29,7 +31,6 @@ def Finder_Number(img,col_row,thres_value=100,min_area_coef=0.25,min_perimeter_c
     index_real_ring=[]
     area_all=[]
     perimeter_all=[]
-    
     area_av=0
     perimeter_av=0
     for contour in contours:
@@ -67,8 +68,16 @@ def Finder_Number(img,col_row,thres_value=100,min_area_coef=0.25,min_perimeter_c
             if norm_to_check<1:
                 index_cocenter_ring.append(k)                
         if len(index_cocenter_ring)>1:
-            index_real_ring_1st.append(index_cocenter_ring[0])
-            index_to_exclude+=index_cocenter_ring[1:]
+            modemax=0
+            max_index=0
+            for ring in index_cocenter_ring:
+                [a,b]=all_possible_ellipse[ring][1]
+                mode_check=a+b
+                if mode_check>modemax:
+                    modemax=mode_check
+                    max_index=ring
+            index_real_ring_1st.append(max_index)
+            index_to_exclude+=index_cocenter_ring
     index_real_ring=index_real_ring_1st
        
     font=cv2.FONT_HERSHEY_COMPLEX_SMALL
@@ -174,8 +183,9 @@ def Finder_Number(img,col_row,thres_value=100,min_area_coef=0.25,min_perimeter_c
         xy=all_possible_ellipse[index_right_order[i]][0]
         imgp.append(xy)
         cv2.putText(cimg[p],'{}'.format(n),(int(xy[0]),int(xy[1])),font,1.0,(255,255,255),1)
-        n=n+1        
-    imshow(cv2.cvtColor(cimg[p],cv2.COLOR_BGR2RGB))
+        n=n+1  
+        
+    imshow(cimg[p])
     return imgp
      
 
